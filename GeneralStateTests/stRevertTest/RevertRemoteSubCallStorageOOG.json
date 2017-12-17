@@ -1,197 +1,195 @@
 {
-    "RevertRemoteSubCallStorageOOG" : {
-        "_info" : {
-            "comment" : "",
-            "filledwith" : "cpp-1.3.0+commit.6e0ce939.Linux.g++",
-            "lllcversion" : "Version: 0.4.18-develop.2017.9.25+commit.a72237f2.Linux.g++",
-            "source" : "src/GeneralStateTestsFiller/stRevertTest/RevertRemoteSubCallStorageOOGFiller.json",
-            "sourceHash" : "5c4c44dae68c1982dc97a85c1935ac7eee80941ac820f1e39d2aeec635aedd58"
+    "RevertRemoteSubCallStorageOOG": {
+        "_info": {
+            "comment": "",
+            "filledwith": "cpp-1.3.0+commit.6e0ce939.Linux.g++",
+            "lllcversion": "Version: 0.4.18-develop.2017.9.25+commit.a72237f2.Linux.g++",
+            "source": "src/GeneralStateTestsFiller/stRevertTest/RevertRemoteSubCallStorageOOGFiller.json",
+            "sourceHash": "5c4c44dae68c1982dc97a85c1935ac7eee80941ac820f1e39d2aeec635aedd58"
         },
-        "env" : {
-            "currentCoinbase" : "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba",
-            "currentDifficulty" : "0x020000",
-            "currentGasLimit" : "0x989680",
-            "currentNumber" : "0x01",
-            "currentTimestamp" : "0x03e8",
-            "previousHash" : "0x5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6"
+        "env": {
+            "currentCoinbase": "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba",
+            "currentDifficulty": "0x020000",
+            "currentGasLimit": "0x989680",
+            "currentNumber": "0x01",
+            "currentTimestamp": "0x03e8",
+            "previousHash": "0x5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6"
         },
-        "post" : {
-            "Byzantium" : [
+        "post": {
+            "Byzantium": [
                 {
-                    "hash" : "0x04068d2d81730e74a66ab864af1073c8b7ade7c47680d10d782638320f776c20",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 0,
-                        "value" : 0
+                    "hash": "0x04068d2d81730e74a66ab864af1073c8b7ade7c47680d10d782638320f776c20",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 0,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 },
                 {
-                    "hash" : "0x991a17af593912ef7be7d526b56e4605271135c8e3f9ab16260ecc53179727ab",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 1,
-                        "value" : 0
+                    "hash": "0x991a17af593912ef7be7d526b56e4605271135c8e3f9ab16260ecc53179727ab",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 1,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 },
                 {
-                    "hash" : "0x55c8e8054f7f508f34286f7016c8a00d0d829ec3d0778bb3204fed4ae04b4607",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 2,
-                        "value" : 0
+                    "hash": "0x55c8e8054f7f508f34286f7016c8a00d0d829ec3d0778bb3204fed4ae04b4607",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 2,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 }
             ],
-            "EIP150" : [
+            "EIP150": [
                 {
-                    "hash" : "0x04068d2d81730e74a66ab864af1073c8b7ade7c47680d10d782638320f776c20",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 0,
-                        "value" : 0
+                    "hash": "0x04068d2d81730e74a66ab864af1073c8b7ade7c47680d10d782638320f776c20",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 0,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 },
                 {
-                    "hash" : "0x0df4cf0474e559e763dd66ca1f543974ae6c675ddf2c7c1deb88274ce226819a",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 1,
-                        "value" : 0
+                    "hash": "0x0df4cf0474e559e763dd66ca1f543974ae6c675ddf2c7c1deb88274ce226819a",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 1,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 },
                 {
-                    "hash" : "0x55c8e8054f7f508f34286f7016c8a00d0d829ec3d0778bb3204fed4ae04b4607",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 2,
-                        "value" : 0
+                    "hash": "0x55c8e8054f7f508f34286f7016c8a00d0d829ec3d0778bb3204fed4ae04b4607",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 2,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 }
             ],
-            "EIP158" : [
+            "EIP158": [
                 {
-                    "hash" : "0x04068d2d81730e74a66ab864af1073c8b7ade7c47680d10d782638320f776c20",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 0,
-                        "value" : 0
+                    "hash": "0x04068d2d81730e74a66ab864af1073c8b7ade7c47680d10d782638320f776c20",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 0,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 },
                 {
-                    "hash" : "0x991a17af593912ef7be7d526b56e4605271135c8e3f9ab16260ecc53179727ab",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 1,
-                        "value" : 0
+                    "hash": "0x991a17af593912ef7be7d526b56e4605271135c8e3f9ab16260ecc53179727ab",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 1,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 },
                 {
-                    "hash" : "0x55c8e8054f7f508f34286f7016c8a00d0d829ec3d0778bb3204fed4ae04b4607",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 2,
-                        "value" : 0
+                    "hash": "0x55c8e8054f7f508f34286f7016c8a00d0d829ec3d0778bb3204fed4ae04b4607",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 2,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 }
             ],
-            "Frontier" : [
+            "Frontier": [
                 {
-                    "hash" : "0xeb8017c3cc4624d2be7c5c746a416e1ba33c6cdaf57bac91e9a3c368e16e8fd1",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 0,
-                        "value" : 0
+                    "hash": "0xeb8017c3cc4624d2be7c5c746a416e1ba33c6cdaf57bac91e9a3c368e16e8fd1",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 0,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 },
                 {
-                    "hash" : "0x1d76ca685425229b1bcc27120c269e0134b87b646ba36735ea9e15b8a604a438",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 1,
-                        "value" : 0
+                    "hash": "0x1d76ca685425229b1bcc27120c269e0134b87b646ba36735ea9e15b8a604a438",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 1,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 },
                 {
-                    "hash" : "0x55c8e8054f7f508f34286f7016c8a00d0d829ec3d0778bb3204fed4ae04b4607",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 2,
-                        "value" : 0
+                    "hash": "0x55c8e8054f7f508f34286f7016c8a00d0d829ec3d0778bb3204fed4ae04b4607",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 2,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 }
             ],
-            "Homestead" : [
+            "Homestead": [
                 {
-                    "hash" : "0xeb8017c3cc4624d2be7c5c746a416e1ba33c6cdaf57bac91e9a3c368e16e8fd1",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 0,
-                        "value" : 0
+                    "hash": "0xeb8017c3cc4624d2be7c5c746a416e1ba33c6cdaf57bac91e9a3c368e16e8fd1",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 0,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 },
                 {
-                    "hash" : "0x1d76ca685425229b1bcc27120c269e0134b87b646ba36735ea9e15b8a604a438",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 1,
-                        "value" : 0
+                    "hash": "0x1d76ca685425229b1bcc27120c269e0134b87b646ba36735ea9e15b8a604a438",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 1,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 },
                 {
-                    "hash" : "0x55c8e8054f7f508f34286f7016c8a00d0d829ec3d0778bb3204fed4ae04b4607",
-                    "indexes" : {
-                        "data" : 0,
-                        "gas" : 2,
-                        "value" : 0
+                    "hash": "0x55c8e8054f7f508f34286f7016c8a00d0d829ec3d0778bb3204fed4ae04b4607",
+                    "indexes": {
+                        "data": 0,
+                        "gas": 2,
+                        "value": 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
+                    "logs": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 }
             ]
         },
-        "pre" : {
-            "0xa000000000000000000000000000000000000000" : {
-                "balance" : "0x01",
-                "code" : "0x60606040526000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063b28175c414610049578063c040622614610058575b610000565b346100005761005661007f565b005b346100005761006561008a565b604051808215151515815260200191505060405180910390f35b600c6000819055505b565b6000600060405161016f80610163833901809050604051809103906000f080156100005790508073ffffffffffffffffffffffffffffffffffffffff166373027f6d306040518263ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001915050600060405180830381600087803b156100005760325a03f11561000057505050600d600181905550600191505b50905600606060405234610000575b610156806100196000396000f30060606040526000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806373027f6d1461003e575b610000565b346100005761006f600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610071565b005b8073ffffffffffffffffffffffffffffffffffffffff1660405180807f73746f7228290000000000000000000000000000000000000000000000000000815250600601905060405180910390207c010000000000000000000000000000000000000000000000000000000090046040518163ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018090506000604051808303816000876161da5a03f192505050505b505600a165627a7a72305820db9c9d1f37fd36768131a0bf9687f465e15b0503452e603be6b6f07b70d72e260029a165627a7a72305820f8ff2f7feef24d01a1cc070e67db9e15ac34810c8e5d1c7f34f3c38148eeae900029",
-                "nonce" : "0x00",
-                "storage" : {
-                }
+        "pre": {
+            "0xa000000000000000000000000000000000000000": {
+                "balance": "0x01",
+                "code": "0x0061736d01000000011c0460017e0060000060047e7e7e7e017f60087e7e7e7e7e7e7e7e017f02130108657468657265756d067573654761730000030504010203010405017001000005040100f4030621067f0141000b7f0141600b7f0141000b7f0041a888020b7e0142000b7e0142000b071c03066d656d6f727902000863616c6c6261636b0100046d61696e00040906010041000b000ab20504960404017f107e017f017e42012110230141186a2903002101230141106a2903002102230141086a290300210323012903002104230141206b2100200041186a2903002105200041106a2903002106200041086a2903002107200029030021080240200520062007200810020440420021014200210242002103420021040c90bdc7020b02400340200579502005200620072008200120022003200410037204400cd8c7c7020b20054201862006423f887c210520064201862007423f887c210620074201862008423f887c210720084201862108200d420186200e423f887c210d200e420186200f423f887c210e200f4201862010423f887c210f201042018621100ca8ebc7020b0b02400340200d200e200f2010100204400cb8f1c7020b200120022003200420052006200720081003044020042008542111200420087d210420032011ad7d211220122003562111201220077d21032003201256201172211120022011ad7d211220122002562111201220067d21022002201256201172211120012011ad7d20057d21010b20084201882007423f867c210820074201882006423f867c210720064201882005423f867c2106200542018821052010420188200f423f867c2110200f420188200e423f867c210f200e420188200d423f867c210e200d420188210d0cb0bec8020b0b0b200041186a2001370300200041106a2002370300200041086a2003370300200020043703000b0e002000200184200284200384500b2b00200020045620002004512001200556200120055120022006562002200651200320075a7172717271720b5d01017f417f21000240034002402302450440410124020cf8fbc802052300410046044000052300410024000e009881c9020b0b0b42051000230141c0ff014a0440000b23014100480440000b1001230141606a24010ce08ec9020b0b0b",
+                "nonce": "0x00",
+                "storage": {}
             },
-            "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b" : {
-                "balance" : "0xe8d4a51000",
-                "code" : "",
-                "nonce" : "0x00",
-                "storage" : {
-                }
+            "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b": {
+                "balance": "0xe8d4a51000",
+                "code": "",
+                "nonce": "0x00",
+                "storage": {}
             }
         },
-        "transaction" : {
-            "data" : [
-                "0xc0406226"
+        "transaction": {
+            "data": [
+                "0x0061736d0100000001080260017e0060000002130108657468657265756d067573654761730000030201010405017001000005040100f4030621067f0141000b7f0141600b7f0141000b7f0041a888020b7e0142000b7e0142000b071c03066d656d6f727902000863616c6c6261636b0100046d61696e00010906010041000b000a3e013c01017f417f21000240034002402302450440410124020cf8e9c602052300410046044000052300410024000e0098efc6020b0b0b42001000000b0b0b"
             ],
-            "gasLimit" : [
+            "gasLimit": [
                 "0x024220",
                 "0x02c308",
                 "0x023668"
             ],
-            "gasPrice" : "0x01",
-            "nonce" : "0x00",
-            "secretKey" : "0x45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8",
-            "to" : "0xa000000000000000000000000000000000000000",
-            "value" : [
+            "gasPrice": "0x01",
+            "nonce": "0x00",
+            "secretKey": "0x45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8",
+            "to": "0xa000000000000000000000000000000000000000",
+            "value": [
                 "0x00"
             ]
         }
