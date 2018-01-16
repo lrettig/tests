@@ -46,16 +46,16 @@ getExternalCodeSize:
 
             ;; read length of 'deadbeef' account code, store in memory at pos 128
             (i32.store (i32.const 128) (call $getExternalCodeSize (i32.const 96)))
-            ;; storage path = 128, store in memory at pos 36
-            (i32.store (i32.const 36) (i32.const 128))
+            ;; storage path = 32, store in memory at pos 160
+            (i32.store (i32.const 160) (i32.const 32))
 
             ;; check the two inputs to storageStore
-            (call $printMemHex (i32.const 0) (i32.const 160))
-            (call $print32 (i32.load (i32.const 36)))
+            (call $printMemHex (i32.const 0) (i32.const 192))
+            (call $print32 (i32.load (i32.const 160)))
             (call $print32 (i32.load (i32.const 128)))
-            (call $storageStore (i32.const 36) (i32.const 128))
+            (call $storageStore (i32.const 160) (i32.const 128))
             (call $printStorageHex (i32.const 0))
-            (call $printStorageHex (i32.const 36))
+            (call $printStorageHex (i32.const 160))
 
             (block
               ;; Address should be 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
@@ -88,9 +88,9 @@ getExternalCodeSize:
         a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
           storage: {
             # the length of the code specified above in pre for the second address
-            0: '0x01aa',
+            0: '0x01ad',
             # the length of the code for the 'deadbeef' account
-            128: '0x08'
+            32: '0x08'
           }
   transaction:
     data: 
