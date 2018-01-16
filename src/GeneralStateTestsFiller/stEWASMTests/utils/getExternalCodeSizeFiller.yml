@@ -23,6 +23,7 @@ getExternalCodeSize:
           (import "debug" "print32" (func $print32 (param i32)))
           (import "debug" "printMemHex" (func $printMemHex (param i32 i32)))
           (import "debug" "printStorageHex" (func $printStorageHex (param i32)))
+          (import "debug" "printStorage" (func $printStorage (param i32)))
           (memory 1)
           (data (i32.const 96)  "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ef\be\ad\de")
 
@@ -46,8 +47,8 @@ getExternalCodeSize:
 
             ;; read length of 'deadbeef' account code, store in memory at pos 128
             (i32.store (i32.const 128) (call $getExternalCodeSize (i32.const 96)))
-            ;; storage path = 32, store in memory at pos 160
-            (i32.store (i32.const 160) (i32.const 32))
+            ;; storage key = 1, store in memory at pos 160
+            (i32.store (i32.const 160) (i32.const 1))
 
             ;; check the two inputs to storageStore
             (call $printMemHex (i32.const 0) (i32.const 192))
@@ -56,6 +57,8 @@ getExternalCodeSize:
             (call $storageStore (i32.const 160) (i32.const 128))
             (call $printStorageHex (i32.const 0))
             (call $printStorageHex (i32.const 160))
+            (call $printStorage (i32.const 0))
+            (call $printStorage (i32.const 160))
 
             (block
               ;; Address should be 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
@@ -88,9 +91,9 @@ getExternalCodeSize:
         a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
           storage: {
             # the length of the code specified above in pre for the second address
-            0: '0x01ad',
+            0: '0x01cb',
             # the length of the code for the 'deadbeef' account
-            32: '0x08'
+            1: '0x08'
           }
   transaction:
     data: 
