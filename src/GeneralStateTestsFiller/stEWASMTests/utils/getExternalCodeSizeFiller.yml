@@ -19,11 +19,6 @@ getExternalCodeSize:
           (import "ethereum" "getExternalCodeSize" (func $getExternalCodeSize (param i32) (result i32)))
           (import "ethereum" "getAddress" (func $getAddress (param i32)))
           (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
-          (import "debug" "print64" (func $print64 (param i64)))
-          (import "debug" "print32" (func $print32 (param i32)))
-          (import "debug" "printMemHex" (func $printMemHex (param i32 i32)))
-          (import "debug" "printStorageHex" (func $printStorageHex (param i32)))
-          (import "debug" "printStorage" (func $printStorage (param i32)))
           (memory 1)
           (data (i32.const 96)  "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ef\be\ad\de")
 
@@ -31,18 +26,9 @@ getExternalCodeSize:
           (export "main" (func $main))
 
           (func $main
-            ;; try reading address stored in memory
-            (call $print64 (i64.load (i32.const 96)))
-            (call $print64 (i64.load (i32.const 104)))
-            (call $print64 (i64.load (i32.const 112)))
-
             ;; for now just use our own address since it's easier
             (call $getAddress (i32.const 64))
-            (call $printMemHex (i32.const 0) (i32.const 128))
-            (call $print64 (i64.load (i32.const 64)))
             (i32.store (i32.const 32) (call $getExternalCodeSize (i32.const 64)))
-            (call $printMemHex (i32.const 0) (i32.const 128))
-            (call $print32 (i32.load (i32.const 32)))
             (call $storageStore (i32.const 0) (i32.const 32))
 
             ;; read length of 'deadbeef' account code, store in memory at pos 128
@@ -51,14 +37,7 @@ getExternalCodeSize:
             (i32.store (i32.const 160) (i32.const 1))
 
             ;; check the two inputs to storageStore
-            (call $printMemHex (i32.const 0) (i32.const 192))
-            (call $print32 (i32.load (i32.const 160)))
-            (call $print32 (i32.load (i32.const 128)))
             (call $storageStore (i32.const 160) (i32.const 128))
-            (call $printStorageHex (i32.const 0))
-            (call $printStorageHex (i32.const 160))
-            (call $printStorage (i32.const 0))
-            (call $printStorage (i32.const 160))
 
             (block
               ;; Address should be 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
@@ -91,7 +70,7 @@ getExternalCodeSize:
         a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
           storage: {
             # the length of the code specified above in pre for the second address
-            0: '0x01cb',
+            0: '0x0105',
             # the length of the code for the 'deadbeef' account
             1: '0x08'
           }
