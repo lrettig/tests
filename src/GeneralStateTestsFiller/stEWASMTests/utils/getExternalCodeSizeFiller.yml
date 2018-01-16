@@ -7,6 +7,11 @@ getExternalCodeSize:
     currentTimestamp: '1000'
     previousHash: 5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6
   pre:
+    deadbeef00000000000000000000000000000000:
+      balance: '100000000000'
+      code: (module)
+      nonce: ''
+      storage: {}
     a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
       balance: '100000000000'
       code: |
@@ -14,33 +19,60 @@ getExternalCodeSize:
           (import "ethereum" "getExternalCodeSize" (func $getExternalCodeSize (param i32) (result i32)))
           (import "ethereum" "getAddress" (func $getAddress (param i32)))
           (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
+          (import "debug" "print64" (func $print64 (param i64)))
+          (import "debug" "print32" (func $print32 (param i32)))
+          (import "debug" "printMemHex" (func $printMemHex (param i32 i32)))
+          (import "debug" "printStorageHex" (func $printStorageHex (param i32)))
           (memory 1)
+          (data (i32.const 96)  "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ef\be\ad\de")
 
           (export "memory" (memory 0))
           (export "main" (func $main))
 
           (func $main
+            ;; try reading address stored in memory
+            (call $print64 (i64.load (i32.const 96)))
+            (call $print64 (i64.load (i32.const 104)))
+            (call $print64 (i64.load (i32.const 112)))
+
             ;; for now just use our own address since it's easier
-            (call $getAddress (i32.const 0))
-            ;;(i32.store (i32.const 64) (call $getExternalCodeSize (i32.const 0)))
-            ;;(call $storageStore (i32.const 0) (i32.const 64))
+            (call $getAddress (i32.const 64))
+            (call $printMemHex (i32.const 0) (i32.const 128))
+            (call $print64 (i64.load (i32.const 64)))
+            (i32.store (i32.const 32) (call $getExternalCodeSize (i32.const 64)))
+            (call $printMemHex (i32.const 0) (i32.const 128))
+            (call $print32 (i32.load (i32.const 32)))
+            (call $storageStore (i32.const 0) (i32.const 32))
+
+            ;; read length of 'deadbeef' account code, store in memory at pos 128
+            (i32.store (i32.const 128) (call $getExternalCodeSize (i32.const 96)))
+            ;; storage path = 128, store in memory at pos 36
+            (i32.store (i32.const 36) (i32.const 128))
+
+            ;; check the two inputs to storageStore
+            (call $printMemHex (i32.const 0) (i32.const 160))
+            (call $print32 (i32.load (i32.const 36)))
+            (call $print32 (i32.load (i32.const 128)))
+            (call $storageStore (i32.const 36) (i32.const 128))
+            (call $printStorageHex (i32.const 0))
+            (call $printStorageHex (i32.const 36))
 
             (block
               ;; Address should be 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
-              ;; Memory should contain 0xbcede5fc74534fa9
-              (if (i64.eq (i64.load (i32.const 0)) (i64.const 0xbcede5fc74534fa9))
+              ;; Memory should contain 0xc15331677e6ebf0b
+              (if (i64.eq (i64.load (i32.const 64)) (i64.const 0xc15331677e6ebf0b))
                 (return)
               )
               (unreachable)
             )
 
-            ;;(block
-            ;;  ;; Code size should be set
-            ;;  (if (i32.eq (i32.load (i32.const 0)) (i32.const 0x08))
-            ;;    (return)
-            ;;  )
-            ;;  (unreachable)
-            ;;)
+            (block
+              ;; Code size should be set
+              (if (i32.eq (i32.load (i32.const 0)) (i32.const 0x0113))
+                (return)
+              )
+              (unreachable)
+            )
           )
         )
       nonce: ''
@@ -56,7 +88,9 @@ getExternalCodeSize:
         a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
           storage: {
             # the length of the code specified above in pre for the second address
-            0: '0x08'
+            0: '0x01aa',
+            # the length of the code for the 'deadbeef' account
+            128: '0x08'
           }
   transaction:
     data: 
