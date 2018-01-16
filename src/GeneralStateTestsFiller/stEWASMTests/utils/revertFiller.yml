@@ -1,0 +1,111 @@
+revert:
+  env:
+    currentCoinbase: 2adc25665018aa1fe0e6bc666dac8fc2697ff9ba
+    currentDifficulty: '0x020000'
+    currentGasLimit: '89128960'
+    currentNumber: '1'
+    currentTimestamp: '1000'
+    previousHash: 5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6
+  pre:
+    deadbeef00000000000000000000000000000000:
+      balance: '100000000000'
+      code: |
+        (module
+          (import "ethereum" "revert" (func $revert (param i32 i32)))
+          (import "ethereum" "return" (func $return (param i32 i32)))
+          (import "ethereum" "getGasLeft" (func $getGasLeft (result i64)))
+          (import "debug" "print32" (func $print32 (param i32)))
+          (import "debug" "print64" (func $print64 (param i64)))
+          (import "debug" "printMemHex" (func $printMemHex (param i32 i32)))
+          (memory 1)
+          (export "memory" (memory 0))
+          (export "main" (func $main))
+          (func $main
+            ;;(call $print64 (call $getGasLeft))
+            ;; Store some data to return
+            (i32.store (i32.const 0) (i32.const 0xabcd))
+            (call $print32 (i32.load (i32.const 0)))
+            (call $printMemHex (i32.const 0) (i32.const 32))
+            ;; Revert and return it
+            (call $revert (i32.const 0) (i32.const 32))
+          )
+        )
+      nonce: ''
+      storage: {}
+    a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+      balance: '100000000000'
+      code: |
+        (module
+          ;;(import "ethereum" "getExternalCodeSize" (func $getExternalCodeSize (param i32) (result i32)))
+          ;;(import "ethereum" "getAddress" (func $getAddress (param i32)))
+          ;;(import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
+          (import "ethereum" "call" (func $call (param i64 i32 i32 i32 i32 i32 i32) (result i32)))
+          ;;(import "ethereum" "getGasLeft" (func $getGasLeft (result i64)))
+          (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
+
+          (import "debug" "print64" (func $print64 (param i64)))
+          (import "debug" "print32" (func $print32 (param i32)))
+          (import "debug" "printMemHex" (func $printMemHex (param i32 i32)))
+          (import "debug" "printStorageHex" (func $printStorageHex (param i32)))
+          (memory 1)
+          (data (i32.const 0)  "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ef\be\ad\de")
+
+          (export "memory" (memory 0))
+          (export "main" (func $main))
+
+          (func $main
+            ;;(call $print64 (call $getGasLeft))
+            (i32.store (i32.const 96) (call $call (i64.const 100000) (i32.const 0) (i32.const 32) (i32.const 32) (i32.const 1) (i32.const 64) (i32.const 32)))
+            (call $print32 (i32.load (i32.const 64)))
+            (call $print32 (i32.load (i32.const 96)))
+            (call $printMemHex (i32.const 64) (i32.const 32))
+            (call $printMemHex (i32.const 96) (i32.const 32))
+
+            ;; Write storage key to memloc 128
+            (i32.store (i32.const 128) (i32.const 0))
+
+            ;; Store the result so we can check it in expect
+            (call $storageStore (i32.const 128) (i32.const 64))
+
+            ;; Expect that the call trapped i.e. result was 0
+            (block
+              (if (i32.eq (i32.load (i32.const 96)) (i32.const 0))
+                (nop)
+              )
+              (unreachable)
+            )
+
+            ;; Check that the return value was stored
+            (block
+              (if (i32.eq (i32.load (i32.const 64)) (i32.const 0xabcd))
+                (return)
+              )
+              (unreachable)
+            )
+          )
+        )
+      nonce: ''
+      storage: {}
+  expect:
+    - indexes:
+        data: -1
+        gas: -1
+        value: -1
+      network:
+        - ALL
+      result:
+        a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+          storage: {
+            0: '0xabcd'
+          }
+  transaction:
+    data: 
+    - ''
+    gasLimit:
+    - '0x5000001'
+    gasPrice: '0x02'
+    nonce: '0x00'
+    secretKey: 45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8
+    to: 'a94f5374fce5edbc8e2a8697c15331677e6ebf0b'
+    value:
+    - '0'
