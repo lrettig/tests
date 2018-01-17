@@ -13,7 +13,6 @@ revert:
         (module
           (import "ethereum" "revert" (func $revert (param i32 i32)))
           (import "ethereum" "return" (func $return (param i32 i32)))
-          (import "ethereum" "getGasLeft" (func $getGasLeft (result i64)))
           (import "debug" "print32" (func $print32 (param i32)))
           (import "debug" "print64" (func $print64 (param i64)))
           (import "debug" "printMemHex" (func $printMemHex (param i32 i32)))
@@ -21,7 +20,6 @@ revert:
           (export "memory" (memory 0))
           (export "main" (func $main))
           (func $main
-            ;;(call $print64 (call $getGasLeft))
             ;; Store some data to return
             (i32.store (i32.const 0) (i32.const 0xabcd))
             (call $print32 (i32.load (i32.const 0)))
@@ -40,7 +38,6 @@ revert:
           ;;(import "ethereum" "getAddress" (func $getAddress (param i32)))
           ;;(import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
           (import "ethereum" "call" (func $call (param i64 i32 i32 i32 i32 i32 i32) (result i32)))
-          ;;(import "ethereum" "getGasLeft" (func $getGasLeft (result i64)))
           (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
 
           (import "debug" "print64" (func $print64 (param i64)))
@@ -54,7 +51,6 @@ revert:
           (export "main" (func $main))
 
           (func $main
-            ;;(call $print64 (call $getGasLeft))
             (i32.store (i32.const 96) (call $call (i64.const 100000) (i32.const 0) (i32.const 32) (i32.const 32) (i32.const 1) (i32.const 64) (i32.const 32)))
             (call $print32 (i32.load (i32.const 64)))
             (call $print32 (i32.load (i32.const 96)))
