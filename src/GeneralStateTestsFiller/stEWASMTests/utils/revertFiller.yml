@@ -25,7 +25,12 @@ revert:
             (call $print32 (i32.load (i32.const 0)))
             (call $printMemHex (i32.const 0) (i32.const 32))
             ;; Revert and return it
-            (call $revert (i32.const 0) (i32.const 32))
+            (call $revert
+              ;; dataOffset i32ptr the memory offset of the output data (bytes)
+              (i32.const 0)
+              ;; length i32 the length of the output data
+              (i32.const 2)
+            )
           )
         )
       nonce: ''
@@ -34,11 +39,10 @@ revert:
       balance: '100000000000'
       code: |
         (module
-          ;;(import "ethereum" "getExternalCodeSize" (func $getExternalCodeSize (param i32) (result i32)))
-          ;;(import "ethereum" "getAddress" (func $getAddress (param i32)))
-          ;;(import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
           (import "ethereum" "call" (func $call (param i64 i32 i32 i32 i32 i32 i32) (result i32)))
           (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
+          (import "ethereum" "getReturnDataSize" (func $getReturnDataSize (result i32)))
+          (import "ethereum" "returnDataCopy" (func $returnDataCopy (param i32 i32 i32)))
 
           (import "debug" "print64" (func $print64 (param i64)))
           (import "debug" "print32" (func $print32 (param i32)))
@@ -51,11 +55,45 @@ revert:
           (export "main" (func $main))
 
           (func $main
-            (i32.store (i32.const 96) (call $call (i64.const 100000) (i32.const 0) (i32.const 32) (i32.const 32) (i32.const 1) (i32.const 64) (i32.const 32)))
-            (call $print32 (i32.load (i32.const 64)))
-            (call $print32 (i32.load (i32.const 96)))
-            (call $printMemHex (i32.const 64) (i32.const 32))
-            (call $printMemHex (i32.const 96) (i32.const 32))
+            (i32.store
+              ;; store success/failure in mem at loc 96
+              (i32.const 96)
+              (call $call
+                ;; gas i64 the gas limit
+                (i64.const 100000)
+                ;; addressOffset i32ptr the memory offset to load the address from (address)
+                (i32.const 0)
+                ;; valueOffset i32ptr the memory offset to load the value from (u128)
+                (i32.const 32)
+                ;; dataOffset i32ptr the memory offset to load data from (bytes)
+                (i32.const 32)
+                ;; dataLength i32 the length of data
+                (i32.const 1)
+                ;; UNUSED: resultOffset i32ptr the memory offset to store the result data at (bytes)
+                (i32.const 0)
+                ;; UNUSED: resultLength i32 the maximal length of result data
+                (i32.const 0)
+              )
+            )
+            ;; Check length of return data
+            (if (i32.ne (call $getReturnDataSize) (i32.const 2))
+              (unreachable)
+            )
+
+            ;; Read return data
+            (call $returnDataCopy
+              ;; resultOffset i32ptr the memory offset to load data into (bytes)
+              (i32.const 64)
+              ;; dataOffset i32 the offset in the return data
+              (i32.const 0)
+              ;; length i32 the length of data to copy
+              (i32.const 2)
+            )
+
+            ;; Check return data
+            (if (i32.ne (i32.load (i32.const 64)) (i32.const 0xabcd))
+              (unreachable)
+            )
 
             ;; Write storage key to memloc 128
             (i32.store (i32.const 128) (i32.const 0))
@@ -64,18 +102,12 @@ revert:
             (call $storageStore (i32.const 128) (i32.const 64))
 
             ;; Expect that the call trapped i.e. result was 0
-            (block
-              (if (i32.eq (i32.load (i32.const 96)) (i32.const 0))
-                (nop)
-              )
+            (if (i32.ne (i32.load (i32.const 96)) (i32.const 0))
               (unreachable)
             )
 
             ;; Check that the return value was stored
-            (block
-              (if (i32.eq (i32.load (i32.const 64)) (i32.const 0xabcd))
-                (return)
-              )
+            (if (i32.ne (i32.load (i32.const 64)) (i32.const 0xabcd))
               (unreachable)
             )
           )
