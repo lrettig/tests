@@ -7,18 +7,39 @@ callDataCopy:
     currentTimestamp: '1000'
     previousHash: 5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6
   pre:
+    # tx sender
     a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+      balance: '100000000000'
+      code: ''
+      nonce: ''
+      storage: {}
+    # main contract, tx receiver
+    abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
       balance: '100000000000'
       code: |
         (module
           (import "ethereum" "callDataCopy" (func $callDataCopy (param i32 i32 i32)))
           (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
+          (import "debug" "printMemHex" (func $printMemHex (param i32 i32)))
+          (import "debug" "printStorageHex" (func $printStorageHex (param i32)))
           (memory 1)
           (export "main" (func $main))
           (export "memory" (memory 0))
+          ;; NOTE: This may need to change once we decide on endianness!
           (func $main
-            (call $callDataCopy (i32.const 62) (i32.const 0) (i32.const 2))
-            (call $storageStore (i32.const 0) (i32.const 32))))
+            (call $callDataCopy
+              ;; resultOffset i32ptr the memory offset to load data into (bytes)
+              (i32.const 32)
+              ;; dataOffset i32 the offset in the input data
+              (i32.const 0)
+              ;; length i32 the length of data to copy
+              (i32.const 2)
+            )
+            (call $printMemHex (i32.const 0) (i32.const 64))
+            (call $storageStore (i32.const 0) (i32.const 32))
+            (call $printStorageHex (i32.const 0))
+          )
+        )
       nonce: ''
       storage: {}
   expect:
@@ -29,9 +50,9 @@ callDataCopy:
       network:
         - ALL
       result:
-        a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+        abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
           storage: {
-            0: '0x1234'
+            0: '0x3412'
           }
   transaction:
     data: 
@@ -41,6 +62,6 @@ callDataCopy:
     gasPrice: '0x02'
     nonce: '0x00'
     secretKey: 45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8
-    to: 'a94f5374fce5edbc8e2a8697c15331677e6ebf0b'
+    to: 'abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd'
     value:
     - '0'
