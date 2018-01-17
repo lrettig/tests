@@ -7,12 +7,20 @@ getExternalCodeSize:
     currentTimestamp: '1000'
     previousHash: 5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6
   pre:
+    # tx sender
+    a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+      balance: '100000000000'
+      code: ''
+      nonce: ''
+      storage: {}
+    # called contract
     deadbeef00000000000000000000000000000000:
       balance: '100000000000'
       code: (module)
       nonce: ''
       storage: {}
-    a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+    # main contract, tx receiver
+    abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
       balance: '100000000000'
       code: |
         (module
@@ -36,23 +44,16 @@ getExternalCodeSize:
             ;; storage key = 1, store in memory at pos 160
             (i32.store (i32.const 160) (i32.const 1))
 
-            ;; check the two inputs to storageStore
             (call $storageStore (i32.const 160) (i32.const 128))
 
-            (block
-              ;; Address should be 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
-              ;; Memory should contain 0xc15331677e6ebf0b
-              (if (i64.eq (i64.load (i32.const 64)) (i64.const 0xc15331677e6ebf0b))
-                (return)
-              )
+            ;; Address should be 0xabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd
+            ;; Memory should contain 0xabcdabcdabcdabcd
+            (if (i64.ne (i64.load (i32.const 64)) (i64.const 0xabcdabcdabcdabcd))
               (unreachable)
             )
 
-            (block
-              ;; Code size should be set
-              (if (i32.eq (i32.load (i32.const 0)) (i32.const 0x0113))
-                (return)
-              )
+            ;; Code size should be set
+            (if (i32.ne (i32.load (i32.const 32)) (i32.const 0xfe))
               (unreachable)
             )
           )
@@ -67,10 +68,10 @@ getExternalCodeSize:
       network:
         - ALL
       result:
-        a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+        abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
           storage: {
             # the length of the code specified above in pre for the second address
-            0: '0x0105',
+            0: '0xfe',
             # the length of the code for the 'deadbeef' account
             1: '0x08'
           }
@@ -82,6 +83,6 @@ getExternalCodeSize:
     gasPrice: '0x02'
     nonce: '0x00'
     secretKey: 45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8
-    to: 'a94f5374fce5edbc8e2a8697c15331677e6ebf0b'
+    to: 'abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd'
     value:
     - '0'

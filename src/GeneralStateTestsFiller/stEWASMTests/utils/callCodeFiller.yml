@@ -7,15 +7,18 @@ callCode:
     currentTimestamp: '1000'
     previousHash: 5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6
   pre:
+    # tx sender
+    a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+      balance: '100000000000'
+      code: ''
+      nonce: ''
+      storage: {}
+    # called contract
     deadbeef00000000000000000000000000000000:
       balance: '100000000000'
       code: |
         (module
           (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
-          (import "debug" "print32" (func $print32 (param i32)))
-          (import "debug" "print64" (func $print64 (param i64)))
-          (import "debug" "printMemHex" (func $printMemHex (param i32 i32)))
-          (import "debug" "printStorageHex" (func $printStorageHex (param i32)))
           (memory 1)
           (export "memory" (memory 0))
           (export "main" (func $main))
@@ -26,19 +29,14 @@ callCode:
             ;; Value
             (i32.store (i32.const 32) (i32.const 0xabcd))
 
-            ;;(call $print32 (i32.load (i32.const 0)))
-            ;;(call $printMemHex (i32.const 0) (i32.const 32))
-
             ;; Write to storage
             (call $storageStore (i32.const 0) (i32.const 32))
-
-            ;; Debug
-            (call $printStorageHex (i32.const 0))
           )
         )
       nonce: ''
       storage: {}
-    a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+    # main contract, tx receiver
+    abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
       balance: '100000000000'
       code: |
         (module
@@ -47,10 +45,6 @@ callCode:
           (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
           (import "ethereum" "callCode" (func $callCode (param i64 i32 i32 i32 i32 i32 i32) (result i32)))
 
-          (import "debug" "print64" (func $print64 (param i64)))
-          (import "debug" "print32" (func $print32 (param i32)))
-          (import "debug" "printMemHex" (func $printMemHex (param i32 i32)))
-          (import "debug" "printStorageHex" (func $printStorageHex (param i32)))
           (memory 1)
           (data (i32.const 0)  "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ef\be\ad\de")
 
@@ -59,13 +53,6 @@ callCode:
 
           (func $main
             (i32.store (i32.const 96) (call $callCode (i64.const 100000) (i32.const 0) (i32.const 32) (i32.const 32) (i32.const 1) (i32.const 64) (i32.const 32)))
-            ;;(call $print32 (i32.load (i32.const 64)))
-            ;;(call $print32 (i32.load (i32.const 96)))
-            ;;(call $printMemHex (i32.const 64) (i32.const 32))
-            ;;(call $printMemHex (i32.const 96) (i32.const 32))
-
-            ;; Debug
-            (call $printStorageHex (i32.const 128))
 
             ;; Expect that the call did not trap i.e. result was 1
             (block
@@ -86,7 +73,7 @@ callCode:
       network:
         - ALL
       result:
-        a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+        abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
           storage: {
             # make sure the storageStore in the first contract's code wrote to
             # the second contract's storage
@@ -100,6 +87,6 @@ callCode:
     gasPrice: '0x02'
     nonce: '0x00'
     secretKey: 45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8
-    to: 'a94f5374fce5edbc8e2a8697c15331677e6ebf0b'
+    to: 'abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd'
     value:
     - '0'

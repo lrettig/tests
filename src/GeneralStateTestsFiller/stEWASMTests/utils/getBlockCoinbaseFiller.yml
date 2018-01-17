@@ -7,7 +7,14 @@ getBlockCoinbase:
     currentTimestamp: '1000'
     previousHash: 5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6
   pre:
+    # tx sender
     a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+      balance: '100000000000'
+      code: ''
+      nonce: ''
+      storage: {}
+    # main contract, tx receiver
+    abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
       balance: '100000000000'
       code: |
         (module
@@ -17,8 +24,7 @@ getBlockCoinbase:
           (export "main" (func $main))
           (export "memory" (memory 0))
           (func $main
-            ;; Note: this comes back as little-endian so it's reversed in expect below
-            (call $getBlockCoinbase (i32.const 44))
+            (call $getBlockCoinbase (i32.const 32))
             (call $storageStore (i32.const 0) (i32.const 32))))
       nonce: ''
       storage: {}
@@ -30,9 +36,9 @@ getBlockCoinbase:
       network:
         - ALL
       result:
-        a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+        abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
           storage: {
-            0: '0xbaf97f69c28fac6d66bce6e01faa18506625dc2a'
+            0: '0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba'
           }
   transaction:
     data: 
@@ -42,6 +48,6 @@ getBlockCoinbase:
     gasPrice: '0x02'
     nonce: '0x00'
     secretKey: 45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8
-    to: 'a94f5374fce5edbc8e2a8697c15331677e6ebf0b'
+    to: 'abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd'
     value:
     - '0'
