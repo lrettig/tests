@@ -7,8 +7,14 @@ createFromTransaction:
     currentTimestamp: '1000'
     previousHash: 5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6
   pre:
-    # We need something here, it's unused
-    0000000000000000000000000000000000000001:
+    # tx sender
+    a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+      balance: '100000000000'
+      code: ''
+      nonce: ''
+      storage: {}
+    # this is a random address, unused
+    60248f0fc9d40345738545c2e931720c8c5f8cbf:
       balance: '0'
       code: ''
       nonce: ''
@@ -21,25 +27,25 @@ createFromTransaction:
       network:
         - ALL
       result:
-          0000000000000000000000000000000000000001:
-            balance: '0'
-        # abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
-        #   storage: {
-        #     0: ''
-        #   }
+        # this is a random address, unused
+        60248f0fc9d40345738545c2e931720c8c5f8cbf:
+          balance: '0'
+        # newly-created contract
+        6295ee1b4f6dd65047762f924ecd367c17eabf8f:
+          code: '0x01'
   transaction:
     data: 
     - |
         (module
-          (import "foo" "bar" (func $foobar))
           (import "ethereum" "return" (func $return (param i32 i32)))
           (import "debug" "printMemHex" (func $printMemHex (param i32 i32)))
           (memory 1)
+          (export "main" (func $main))
           (func $main
-            (call $printMemHex (i32.const 0) (i32.const 32))
             ;; Store some data to return
-            (i32.store (i32.const 0) (i32.const 0))
+            (i32.store (i32.const 0) (i32.const 1))
             ;; Return it
+            (call $printMemHex (i32.const 0) (i32.const 32))
             (call $return 
               ;; dataOffset i32ptr the memory offset of the output data (bytes)
               (i32.const 0)
