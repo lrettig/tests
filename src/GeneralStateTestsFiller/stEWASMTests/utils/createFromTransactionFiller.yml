@@ -13,12 +13,6 @@ createFromTransaction:
       code: ''
       nonce: ''
       storage: {}
-    # this is a random address, unused
-    60248f0fc9d40345738545c2e931720c8c5f8cbf:
-      balance: '0'
-      code: ''
-      nonce: ''
-      storage: {}
   expect:
     - indexes:
         data: -1
@@ -27,9 +21,6 @@ createFromTransaction:
       network:
         - ALL
       result:
-        # this is a random address, unused
-        60248f0fc9d40345738545c2e931720c8c5f8cbf:
-          balance: '0'
         # newly-created contract
         6295ee1b4f6dd65047762f924ecd367c17eabf8f:
           code: '0x01'
