@@ -1,6 +1,4 @@
-# Basic EWASM interface test fro ADDRESS
----
-getAddress:
+getBlockCoinbase:
   env:
     currentCoinbase: 2adc25665018aa1fe0e6bc666dac8fc2697ff9ba
     currentDifficulty: '0x020000'
@@ -9,28 +7,25 @@ getAddress:
     currentTimestamp: '1000'
     previousHash: 5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6
   pre:
+    # tx sender
     a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
       balance: '100000000000'
       code: ''
-      nonce: '0'
+      nonce: ''
       storage: {}
-    b94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+    # main contract, tx receiver
+    abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
       balance: '100000000000'
       code: |
         (module
+          (import "ethereum" "getBlockCoinbase" (func $getBlockCoinbase (param i32)))
           (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
-          (import "ethereum" "getAddress"   (func $getAddress   (param i32)))
           (memory 1)
           (export "main" (func $main))
           (export "memory" (memory 0))
           (func $main
-            (local $addrOffset i32)
-            (local $keyOffset  i32)
-            (set_local $addrOffset (i32.const 32))
-            (set_local $keyOffset  (i32.const 0))
-            
-            (call $getAddress   (get_local $addrOffset))
-            (call $storageStore (get_local $keyOffset) (get_local $addrOffset))))
+            (call $getBlockCoinbase (i32.const 32))
+            (call $storageStore (i32.const 0) (i32.const 32))))
       nonce: ''
       storage: {}
   expect:
@@ -41,18 +36,18 @@ getAddress:
       network:
         - ALL
       result:
-        b94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+        abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd:
           storage: {
-            0: '0xb94f5374fce5edbc8e2a8697c15331677e6ebf0b'
+            0: '0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba'
           }
   transaction:
-    data:
+    data: 
     - ''
     gasLimit:
     - '0x5000001'
     gasPrice: '0x02'
     nonce: '0x00'
     secretKey: 45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8
-    to: 'b94f5374fce5edbc8e2a8697c15331677e6ebf0b'
+    to: 'abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd'
     value:
     - '0'
