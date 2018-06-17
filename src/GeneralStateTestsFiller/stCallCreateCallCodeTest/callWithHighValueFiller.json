@@ -11,11 +11,19 @@
         "expect" : [
             {
                 "indexes" : { "data" : -1, "gas" : -1, "value" : -1 },
-                "network" : ["Frontier","Homestead", "EIP158", "EIP150" ],
+                "network" : ["Frontier","Homestead", "EIP158", "EIP150", "Byzantium" ],
                 "result" : {
                     "095e7baea6a6c7c4c2dfeb977efac326af552d87" : {
                         "storage" : {
-                        }
+                          "0":"1"
+                        },
+                        "balance": "1000000000000000000"
+                    },
+                    "a94f5374fce5edbc8e2a8697c15331677e6ebf0b" : {
+                        "balance": "1000000000000000000"
+                    },
+                    "945304eb96065b2a98b57a48a06ae28d285a71b5" : {
+                        "balance": "1000000000000000024"
                     }
                 }
             }
@@ -55,7 +63,7 @@
             "secretKey" : "45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8",
             "to" : "095e7baea6a6c7c4c2dfeb977efac326af552d87",
             "value" : [
-                "0"
+                "999"
             ]
         }
     }
