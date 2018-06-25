@@ -1,0 +1,169 @@
+wrc20Challenge:
+  env:
+    currentCoinbase: 2adc25665018aa1fe0e6bc666dac8fc2697ff9ba
+    currentDifficulty: '0x020000'
+    currentGasLimit: '89128960'
+    currentNumber: '1'
+    currentTimestamp: '1000'
+    previousHash: 5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6
+  pre:
+    a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+      balance: '100000000000'
+      code: ''
+      nonce: '0x4'
+      storage: {}
+    # WRC20 contract, compiled using AssemblyScript
+    a000000000000000000000000000000000000000:
+      balance: '0'
+      nonce: ''
+      storage: {
+        # Hardcoded token balances: as specified in the prompt
+        0xeD09375DC6B20050d242d1611af97eE4A6E93CAd: 1000000
+      }
+      code: '0x0061736d0100000001090260027f7f0060000002190108657468657265756d0c73746f7261676553746f72650000030201010503010001071102066d656d6f72790200046d61696e00010a26012401027f41e0022100418003210120004103360200200141effd023602002000200110000b'
+    deadbeef00000000000000000000000000000000:
+      balance: '100000000000'
+      nonce: ''
+      storage: {}
+      code: |
+        (module
+          (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
+          (import "ethereum" "call" (func $call (param i64 i32 i32 i32 i32) (result i32)))
+          (import "ethereum" "getReturnDataSize" (func $getReturnDataSize (result i32)))
+          (import "ethereum" "returnDataCopy" (func $returnDataCopy (param i32 i32 i32)))
+          (memory 1)
+
+          ;; first command: query balance of 0xeD09375DC6B20050d242d1611af97eE4A6E93CAd
+          (data (i32.const 0) "\99\93\02\1a\ed\09\37\5d\c6\b2\00\50\d2\42\d1\61\1a\f9\7e\e4\a6\e9\3c\ad")
+
+          ;; second command: Transfer 500000 to 0xe929CF2544363bdCEE4a976515d5F97758Ef476c
+          (data (i32.const 32) "\5d\35\9f\bd\e9\29\cf\25\44\36\3b\dc\ee\4a\97\65\15\d5\f9\77\58\ef\47\6c\7a\12\00")
+
+          ;; third command: Query balance of 0xeD09375DC6B20050d242d1611af97eE4A6E93CAd
+          (data (i32.const 64) "\99\93\02\1a\ed\09\37\5d\c6\b2\00\50\d2\42\d1\61\1a\f9\7e\e4\a6\e9\3c\ad")
+          
+          ;; fourth command: Query balance of 0xe929CF2544363bdCEE4a976515d5F97758Ef476c
+          (data (i32.const 96) "\99\93\02\1a\e9\29\cf\25\44\36\3b\dc\ee\4a\97\65\15\d5\f9\77\58\ef\47\6c\7a\12\00")
+
+          ;; contract address
+          (data (i32.const 128) "\a0\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
+
+          (export "memory" (memory 0))
+          (export "main" (func $main))
+
+          (func $main
+            ;; locals
+            (local $memOffset i32)
+
+            (local $ptrAddress i32)
+
+            (local $ptrCommand1 i32)
+            (local $ptrCommand2 i32)
+            (local $ptrCommand3 i32)
+            (local $ptrCommand4 i32)
+
+            (local $lenCommand1 i32)
+            (local $lenCommand2 i32)
+            (local $lenCommand3 i32)
+            (local $lenCommand4 i32)
+
+            (local $ptrStorageKey1 i32)
+            (local $ptrStorageKey2 i32)
+            (local $ptrStorageKey3 i32)
+            (local $ptrStorageKey4 i32)
+
+            (local $ptrValueZero i32)
+
+            (local $ptrReturnData1 i32)
+            (local $ptrReturnData2 i32)
+            (local $ptrReturnData3 i32)
+            (local $ptrReturnData4 i32)
+
+            ;; init data pointers
+            (set_local $ptrCommand1 (i32.const 0))
+            (set_local $ptrCommand2 (i32.const 32))
+            (set_local $ptrCommand3 (i32.const 64))
+            (set_local $ptrCommand4 (i32.const 96))
+            (set_local $ptrAddress (i32.const 128))
+
+            (set_local $lenCommand1 (i32.const 24))
+            (set_local $lenCommand2 (i32.const 24))
+            (set_local $lenCommand3 (i32.const 24))
+            (set_local $lenCommand4 (i32.const 24))
+
+            ;; memory layout and pointers
+            (set_local $memOffset (i32.const 160))
+            (set_local $ptrStorageKey1 (get_local $memOffset))
+            (set_local $ptrStorageKey2 (i32.add (get_local $memOffset) (i32.const 32)))
+            (set_local $ptrStorageKey3 (i32.add (get_local $memOffset) (i32.const 64)))
+            (set_local $ptrStorageKey4 (i32.add (get_local $memOffset) (i32.const 96)))
+            (set_local $ptrValueZero (i32.add (get_local $memOffset) (i32.const 128)))
+            (set_local $ptrReturnData1 (i32.add (get_local $memOffset) (i32.const 160)))
+
+            ;; initialize
+            (i32.store (get_local $ptrStorageKey1) (i32.const 1))
+            (i32.store (get_local $ptrStorageKey2) (i32.const 2))
+            (i32.store (get_local $ptrStorageKey3) (i32.const 3))
+            (i32.store (get_local $ptrStorageKey4) (i32.const 4))
+            (i32.store (get_local $ptrValueZero) (i32.const 0))
+
+            ;; step 1. Query balance of 0xeD09375DC6B20050d242d1611af97eE4A6E93CAd
+            (call $storageStore
+              (get_local $ptrStorageKey1)
+              (call $call
+                ;; gas
+                (i64.const 100000)
+                ;; address offset
+                (get_local $ptrAddress)
+                ;; value offset
+                (get_local $ptrValueZero)
+                ;; data offset
+                (get_local $ptrCommand1)
+                ;; data length
+                (get_local $lenCommand1)
+              )
+            )
+
+            ;; read return val
+            (call $returnDataCopy
+              ;; resultOffset
+              (get_local $ptrReturnData1)
+              ;; dataOffset
+              (i32.const 0)
+              ;; length
+              (call $getReturnDataSize)
+            )
+
+            ;; store it
+            (call $storageStore (get_local $ptrStorageKey2) (get_local $ptrReturnData1))
+          )
+        )
+  expect:
+    - indexes:
+        data: !!int -1
+        gas: !!int -1
+        value: !!int -1
+      network:
+        - ALL
+      result:
+        a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+          balance: '99999853498'
+        deadbeef00000000000000000000000000000000:
+          storage: {
+            # First call should be success
+            # $memPointerStorageKey1 = 1
+            1: 0,
+            # first return data: expect to get balance 1000000 that we set above in pre
+            2: 1000000
+          }
+  transaction:
+    data:
+    - '0x'
+    gasLimit:
+    - '0x6acfc0'
+    gasPrice: '0x01'
+    nonce: '0x04'
+    secretKey: "45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8"
+    to: 'deadbeef00000000000000000000000000000000'
+    value:
+    - '0'
