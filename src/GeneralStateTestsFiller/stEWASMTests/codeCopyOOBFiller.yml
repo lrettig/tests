@@ -54,13 +54,13 @@ codeCopyOOB:
         # dataCost = (nonZeroBytes * 68) + (zeroBytes * 4)
         #          = (2 * 68) + (0 * 4) = 136
         a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
-          balance: "99999958858"
+          balance: "99999973858"
         deadbeef00000000000000000000000000000000:
           storage: {
             # This storage slot should contain the first ten bytes of the code contained
-            # at this address. Note that it's in little-endian order, so it's the reverse
-            # of the code contained in the filled test file.
-            0: ""
+            # at this address. It should contain all zeroes since we called $codeCopy
+            # out of bounds.
+            0: "0x0"
           }
   transaction:
     data:
