@@ -122,7 +122,7 @@ returnDataCopy:
               (get_local $retDataSize)
             )
 
-            ;; call returnDataCopy and store the result
+            ;; store the result
             (call $storageStore
               (get_local $ptrStorageKey2)
               (get_local $ptrResult)
