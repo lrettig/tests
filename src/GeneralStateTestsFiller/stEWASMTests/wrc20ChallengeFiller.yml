@@ -7,7 +7,7 @@ wrc20Challenge:
     currentTimestamp: '1000'
     previousHash: 5e20a0453cecd065ea59c37ac63e079ee08998b6045136a8ce6635c7912ec0b6
   pre:
-    ed09375dc6b20050d242d1611af97ee4a6e93cad:
+    a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
       balance: '100000000000'
       code: ''
       nonce: '0x4'
@@ -18,39 +18,36 @@ wrc20Challenge:
       nonce: ''
       storage: {
         # Hardcoded token balances: as specified in the prompt
-        0xed09375dc6b20050d242d1611af97ee4a6e93cad: 1000000
+        0xdeadbeef00000000000000000000000000000000: 1000000
       }
       code: '0x0061736d01000000011c066000006000017f60027f7f0060017f017f60037f7f7f0060017f0002b0010808657468657265756d0f67657443616c6c4461746153697a65000108657468657265756d06726576657274000208657468657265756d0c63616c6c44617461436f7079000408657468657265756d0b73746f726167654c6f6164000208657468657265756d0672657475726e000208657468657265756d0967657443616c6c6572000508657468657265756d0c73746f7261676553746f726500020564656275670b7072696e744d656d4865780002030605030000000005030100010628077f0041030b7f0041080b7f0041070b7f004180808080040b7f0141000b7f0141000b7f0041080b071102046d61696e000b066d656d6f7279020008010c0ae403057e01067f2000044020004180808080044b0440000b23052101200120006a41076a4107417f737121023f002103200220034110744b0440200220016b41ffff036a41ffff03417f737141107621042003220520042206200520064a1b2105200540004100480440200440004100480440000b0b0b2002240520010f0b41000b3e01027f100041184704404100410010010b41141008210020004104411410024120100821012000200110032000412010072001412010072001412010040bb10101087f100041204704404100410010010b4120100821002000100541201008210120014104411410024120100821022002411841081002200241201007412010082103412010082104200020031003200120041003200041201007200141201007200341201007200441201007200328020021052004280200210620022802002107200520074804404100410010010b2003200520076b3602002004200620076a3602002000200310062001200410060b5d01037f100041044804404100410010010b4104100821002000410041041002200028020021010240024002400240200121022002419a84cccc79460d00200241bdbfd6e905460d010c020b10090c020b100a0c010b4100410010010b0b1300230641076a4107417f73712404230424050b'
     deadbeef00000000000000000000000000000000:
       balance: '100000000000'
       nonce: ''
-      storage: {
-        # Hardcoded token balances: as specified in the prompt
-        0xed09375dc6b20050d242d1611af97ee4a6e93cad: 1000000
-      }
+      storage: {}
       code: |
         (module
           (import "ethereum" "storageStore" (func $storageStore (param i32 i32)))
-          (import "ethereum" "callDelegate" (func $callDelegate (param i64 i32 i32 i32) (result i32)))
+          (import "ethereum" "call" (func $call (param i64 i32 i32 i32 i32) (result i32)))
           (import "ethereum" "getReturnDataSize" (func $getReturnDataSize (result i32)))
           (import "ethereum" "returnDataCopy" (func $returnDataCopy (param i32 i32 i32)))
           (memory 1)
 
-          ;; first command: query balance of 0xeD09375DC6B20050d242d1611af97eE4A6E93CAd
-          (data (i32.const 0) "\1a\02\93\99\ad\3c\e9\a6\e4\7e\f9\1a\61\d1\42\d2\50\00\b2\c6\5d\37\09\ed")
+          ;; first command: query balance of 0xdeadbeef00000000000000000000000000000000
+          (data (i32.const 0) "\1a\02\93\99\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ef\be\ad\de")
 
           ;; second command: Transfer 500000 to 0xe929CF2544363bdCEE4a976515d5F97758Ef476c
           (data (i32.const 32) "\bd\9f\35\5d\6c\47\ef\58\77\f9\d5\15\65\97\4a\ee\dc\3b\36\44\25\cf\29\e9\20\a1\07\00\00\00\00\00")
-          ;;(data (i32.const 32) "\bd\9f\35\5d\e9\29\cf\25\44\36\3b\dc\ee\4a\97\65\15\d5\f9\77\58\ef\47\6c\20\a1\07\00\00\00\00\00")
 
-          ;; third command: Query balance of 0xeD09375DC6B20050d242d1611af97eE4A6E93CAd
-          (data (i32.const 64) "\99\93\02\1a\ed\09\37\5d\c6\b2\00\50\d2\42\d1\61\1a\f9\7e\e4\a6\e9\3c\ad")
+          ;; third command: Query balance of 0xdeadbeef00000000000000000000000000000000
+          (data (i32.const 64) "\1a\02\93\99\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ef\be\ad\de")
           
           ;; fourth command: Query balance of 0xe929CF2544363bdCEE4a976515d5F97758Ef476c
-          (data (i32.const 96) "\99\93\02\1a\e9\29\cf\25\44\36\3b\dc\ee\4a\97\65\15\d5\f9\77\58\ef\47\6c\7a\12\00")
+          (data (i32.const 96) "\1a\02\93\99\6c\47\ef\58\77\f9\d5\15\65\97\4a\ee\dc\3b\36\44\25\cf\29\e9")
 
           ;; contract address
           (data (i32.const 128) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\a0")
+          ;;(data (i32.const 128) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ef\be\ad\de")
 
           (export "memory" (memory 0))
           (export "main" (func $main))
@@ -58,8 +55,8 @@ wrc20Challenge:
           (func $main
             ;; locals
             (local $memOffset i32)
-
             (local $ptrAddress i32)
+            (local $ptrValueZero i32)
 
             (local $ptrCommand1 i32)
             (local $ptrCommand2 i32)
@@ -73,11 +70,17 @@ wrc20Challenge:
 
             (local $ptrCallResult1 i32)
             (local $ptrCallResult2 i32)
+            (local $ptrCallResult3 i32)
+            (local $ptrCallResult4 i32)
 
             (local $ptrStorageKey1 i32)
             (local $ptrStorageKey2 i32)
             (local $ptrStorageKey3 i32)
             (local $ptrStorageKey4 i32)
+            (local $ptrStorageKey5 i32)
+            (local $ptrStorageKey6 i32)
+            (local $ptrStorageKey7 i32)
+            (local $ptrStorageKey8 i32)
 
             (local $ptrReturnData1 i32)
             (local $ptrReturnData2 i32)
@@ -93,36 +96,48 @@ wrc20Challenge:
 
             (set_local $lenCommand1 (i32.const 24))
             (set_local $lenCommand2 (i32.const 32))
-
             (set_local $lenCommand3 (i32.const 24))
             (set_local $lenCommand4 (i32.const 24))
 
             ;; memory layout and pointers
-            (set_local $memOffset (i32.const 160))
-            (set_local $ptrStorageKey1 (get_local $memOffset))
-            (set_local $ptrStorageKey2 (i32.add (get_local $memOffset) (i32.const 32)))
-            (set_local $ptrStorageKey3 (i32.add (get_local $memOffset) (i32.const 64)))
-            (set_local $ptrStorageKey4 (i32.add (get_local $memOffset) (i32.const 96)))
-            (set_local $ptrReturnData1 (i32.add (get_local $memOffset) (i32.const 160)))
-            (set_local $ptrReturnData2 (i32.add (get_local $memOffset) (i32.const 192)))
-            (set_local $ptrCallResult1 (i32.add (get_local $memOffset) (i32.const 224)))
-            (set_local $ptrCallResult2 (i32.add (get_local $memOffset) (i32.const 256)))
+            (set_local $memOffset      (i32.const 160))
+            (set_local $ptrStorageKey1 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 0))))
+            (set_local $ptrStorageKey2 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 1))))
+            (set_local $ptrStorageKey3 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 2))))
+            (set_local $ptrStorageKey4 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 3))))
+            (set_local $ptrValueZero   (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 4))))
+            (set_local $ptrReturnData1 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 5))))
+            (set_local $ptrReturnData2 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 6))))
+            (set_local $ptrCallResult1 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 7))))
+            (set_local $ptrCallResult2 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 8))))
+            (set_local $ptrCallResult3 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 9))))
+            (set_local $ptrCallResult4 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 10))))
+            (set_local $ptrStorageKey5 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 11))))
+            (set_local $ptrStorageKey6 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 12))))
+            (set_local $ptrStorageKey7 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 13))))
+            (set_local $ptrStorageKey8 (i32.add (get_local $memOffset) (i32.mul (i32.const 32) (i32.const 14))))
 
             ;; initialize
             (i32.store (get_local $ptrStorageKey1) (i32.const 1))
             (i32.store (get_local $ptrStorageKey2) (i32.const 2))
             (i32.store (get_local $ptrStorageKey3) (i32.const 3))
             (i32.store (get_local $ptrStorageKey4) (i32.const 4))
+            (i32.store (get_local $ptrStorageKey5) (i32.const 5))
+            (i32.store (get_local $ptrStorageKey6) (i32.const 6))
+            (i32.store (get_local $ptrStorageKey7) (i32.const 7))
+            (i32.store (get_local $ptrStorageKey8) (i32.const 8))
 
-            ;; first command: Query balance of 0xeD09375DC6B20050d242d1611af97eE4A6E93CAd
+            ;; first command: Query balance of 0xdeadbeef00000000000000000000000000000000
             ;; and save result
             (i32.store
               (get_local $ptrCallResult1)
-              (call $callDelegate
+              (call $call
                 ;; gas
                 (i64.const 100000)
                 ;; address offset
                 (get_local $ptrAddress)
+                ;; value offset
+                (get_local $ptrValueZero)
                 ;; data offset
                 (get_local $ptrCommand1)
                 ;; data length
@@ -150,11 +165,13 @@ wrc20Challenge:
             ;; and save result
             (i32.store
               (get_local $ptrCallResult2)
-              (call $callDelegate
+              (call $call
                 ;; gas
                 (i64.const 100000)
                 ;; address offset
                 (get_local $ptrAddress)
+                ;; value offset
+                (get_local $ptrValueZero)
                 ;; data offset
                 (get_local $ptrCommand2)
                 ;; data length
@@ -177,6 +194,74 @@ wrc20Challenge:
 
             ;; store it
             (call $storageStore (get_local $ptrStorageKey4) (get_local $ptrReturnData2))
+
+            ;; third command: Query balance of 0xdeadbeef00000000000000000000000000000000
+            ;; and save result
+            (i32.store
+              (get_local $ptrCallResult3)
+              (call $call
+                ;; gas
+                (i64.const 100000)
+                ;; address offset
+                (get_local $ptrAddress)
+                ;; value offset
+                (get_local $ptrValueZero)
+                ;; data offset
+                (get_local $ptrCommand3)
+                ;; data length
+                (get_local $lenCommand3)
+              )
+            )
+
+            ;; store it
+            (call $storageStore (get_local $ptrStorageKey5) (get_local $ptrCallResult3))
+
+            ;; read return val
+            (call $returnDataCopy
+              ;; resultOffset
+              (get_local $ptrReturnData3)
+              ;; dataOffset
+              (i32.const 0)
+              ;; length
+              (call $getReturnDataSize)
+            )
+
+            ;; store it
+            (call $storageStore (get_local $ptrStorageKey6) (get_local $ptrReturnData3))
+
+            ;; fourth command: Query balance of 0xe929CF2544363bdCEE4a976515d5F97758Ef476c
+            ;; and save result
+            (i32.store
+              (get_local $ptrCallResult4)
+              (call $call
+                ;; gas
+                (i64.const 100000)
+                ;; address offset
+                (get_local $ptrAddress)
+                ;; value offset
+                (get_local $ptrValueZero)
+                ;; data offset
+                (get_local $ptrCommand4)
+                ;; data length
+                (get_local $lenCommand4)
+              )
+            )
+
+            ;; store it
+            (call $storageStore (get_local $ptrStorageKey7) (get_local $ptrCallResult4))
+
+            ;; read return val
+            (call $returnDataCopy
+              ;; resultOffset
+              (get_local $ptrReturnData4)
+              ;; dataOffset
+              (i32.const 0)
+              ;; length
+              (call $getReturnDataSize)
+            )
+
+            ;; store it
+            (call $storageStore (get_local $ptrStorageKey8) (get_local $ptrReturnData4))
           )
         )
   expect:
@@ -187,8 +272,8 @@ wrc20Challenge:
       network:
         - ALL
       result:
-        ed09375dc6b20050d242d1611af97ee4a6e93cad:
-          balance: '99999916950'
+        a94f5374fce5edbc8e2a8697c15331677e6ebf0b:
+          balance: '99999865108'
         deadbeef00000000000000000000000000000000:
           storage: {
             # First call should be success
@@ -200,15 +285,21 @@ wrc20Challenge:
             3: 0,
             # No output expected from second call
             4: '',
-            0xed09375dc6b20050d242d1611af97ee4a6e93cad: 500000,
+            # Third call should be success
+            5: 0,
+            # Third call should return new balance
+            6: 500000,
+            # Fourth call should be success
+            7: 0,
+            # Fourth call should return new balance
+            8: 500000,
+          }
+        a000000000000000000000000000000000000000:
+          storage: {
+            # Token balances
+            0xdeadbeef00000000000000000000000000000000: 500000,
             0xe929cf2544363bdcee4a976515d5f97758ef476c: 500000
           }
-        # a000000000000000000000000000000000000000:
-        #   storage: {
-        #     # Token balances
-        #     0xed09375dc6b20050d242d1611af97ee4a6e93cad: 500000,
-        #     0xe929cf2544363bdcee4a976515d5f97758ef476c: 500000
-        #   }
   transaction:
     data:
     - '0x'
@@ -216,7 +307,7 @@ wrc20Challenge:
     - '0x6acfc0'
     gasPrice: '0x01'
     nonce: '0x04'
-    secretKey: "dffca753e40d47521d2dd94fe56b0131051d91df614ef0a5e1c301ba9575c550"
+    secretKey: "45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8"
     to: 'deadbeef00000000000000000000000000000000'
     value:
     - '0'
