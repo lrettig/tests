@@ -24,6 +24,7 @@ initMalformedBytecodeInvalidMain:
     #       (import "ethereum" "finish" (func $finish (param i32 i32)))
     #       (memory 1)
     #       (export "memory" (memory 0))
+    #       ;; signature does not match definition for $main
     #       (export "main" (func $main (param i32)))
     #       (func $main
     #         (call $finish
