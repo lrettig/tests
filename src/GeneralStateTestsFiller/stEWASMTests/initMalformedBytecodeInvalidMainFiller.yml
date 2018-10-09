@@ -25,8 +25,8 @@ initMalformedBytecodeInvalidMain:
     #       (memory 1)
     #       (export "memory" (memory 0))
     #       ;; signature does not match definition for $main
-    #       (export "main" (func $main (param i32)))
-    #       (func $main
+    #       (export "main" (func $main))
+    #       (func $main (param i32)
     #         (call $finish
     #           (i32.const 0)
     #           (i32.const 0)
@@ -46,7 +46,7 @@ initMalformedBytecodeInvalidMain:
           ;; see WASM source for compiled code, above
           (data (i32.const 0) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00") ;; key1
           (data (i32.const 64) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\01") ;; key2 
-          (data (i32.const 256) "\00\61\73\6d\01\00\00\00\01\09\02\60\02\7f\7f\00\60\00\00\02\13\01\08\65\74\68\65\72\65\75\6d\06\66\69\6e\69\73\68\00\00\03\02\01\01\05\03\01\00\01\07\11\02\06\6d\65\6d\6f\72\79\02\00\04\6d\61\69\6e\00\01\0a\0a\01\08\00\41\00\41\00\10\00\0b") ;; init code
+          (data (i32.const 256) "\00\61\73\6d\01\00\00\00\01\0a\02\60\02\7f\7f\00\60\01\7f\00\02\13\01\08\65\74\68\65\72\65\75\6d\06\66\69\6e\69\73\68\00\00\03\02\01\01\05\03\01\00\01\07\11\02\06\6d\65\6d\6f\72\79\02\00\04\6d\61\69\6e\00\01\0a\0a\01\08\00\41\00\41\00\10\00\0b") ;; init code
           (export "memory" (memory 0))
           (export "main" (func $main))
 
@@ -66,7 +66,7 @@ initMalformedBytecodeInvalidMain:
             (set_local $memStorageval2 (i32.const 96))
             (set_local $memValue (i32.const 128))
             (set_local $memCode (i32.const 256))
-            (set_local $codeLen (i32.const 54))
+            (set_local $codeLen (i32.const 81))
 
             ;; we expect this to fail
             (i32.store

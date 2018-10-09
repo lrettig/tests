@@ -5,7 +5,7 @@
             "filledwith" : "testeth 1.4.0",
             "lllcversion" : "Version: 0.4.20-develop.2018.1.14+commit.0c20b6da.Darwin.appleclang",
             "source" : "src/GeneralStateTestsFiller/stEWASMTests/initMalformedBytecodeInvalidMainFromTxFiller.yml",
-            "sourceHash" : "0304c83d2d0ec956a069face52f49e0b07a1ff12fd3fe7e62872c351c62df6ea"
+            "sourceHash" : "1dec9ea5bedb9bf48b8ab3244d493f746702068a8dc97bc5e2715eb8e8442e3f"
         },
         "env" : {
             "currentCoinbase" : "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba",
@@ -18,7 +18,7 @@
         "post" : {
             "Byzantium" : [
                 {
-                    "hash" : "0xb68c4f86df4814d2b034aa07649f48b6f6076c51df1328ba31a83af2cd4078cb",
+                    "hash" : "0xe26615f8ea7db8cb51f9cf5b10d64c2bd5e8d34cae7b800be0c6109ee45c349a",
                     "indexes" : {
                         "data" : 0,
                         "gas" : 0,
@@ -27,7 +27,7 @@
                     "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
                     "postState" : {
                         "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba" : {
-                            "balance" : "0xe048",
+                            "balance" : "0xe0cc",
                             "code" : "",
                             "nonce" : "0x00",
                             "storage" : {
@@ -41,7 +41,7 @@
                             }
                         },
                         "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b" : {
-                            "balance" : "0x17487607b8",
+                            "balance" : "0x1748760734",
                             "code" : "",
                             "nonce" : "0x01",
                             "storage" : {
@@ -62,7 +62,7 @@
         },
         "transaction" : {
             "data" : [
-                "0x0061736d0100000001090260027f7f0060000002130108657468657265756d0666696e6973680000030201010503010001071102066d656d6f72790200046d61696e00010a0a0108004100410010000b"
+                "0x0061736d01000000010a0260027f7f0060017f0002130108657468657265756d0666696e6973680000030201010503010001071102066d656d6f72790200046d61696e00010a0a0108004100410010000b"
             ],
             "gasLimit" : [
                 "0x5000001"
