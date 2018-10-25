@@ -18,36 +18,13 @@
         "post" : {
             "Byzantium" : [
                 {
-                    "hash" : "0xe26615f8ea7db8cb51f9cf5b10d64c2bd5e8d34cae7b800be0c6109ee45c349a",
+                    "hash" : "0x60f7870ae7c1fb1176a96382cbfe1c1dfc83cb08081728a7396e901a70832a36",
                     "indexes" : {
                         "data" : 0,
                         "gas" : 0,
                         "value" : 0
                     },
-                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
-                    "postState" : {
-                        "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba" : {
-                            "balance" : "0xe0cc",
-                            "code" : "",
-                            "nonce" : "0x00",
-                            "storage" : {
-                            }
-                        },
-                        "0x6295ee1b4f6dd65047762f924ecd367c17eabf8f" : {
-                            "balance" : "0x00",
-                            "code" : "",
-                            "nonce" : "0x01",
-                            "storage" : {
-                            }
-                        },
-                        "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b" : {
-                            "balance" : "0x1748760734",
-                            "code" : "",
-                            "nonce" : "0x01",
-                            "storage" : {
-                            }
-                        }
-                    }
+                    "logs" : "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"
                 }
             ]
         },
